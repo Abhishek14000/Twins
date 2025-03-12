@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome, Twins!</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(circle, #000428, #004e92);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+      position: relative;
+    }
+    .planet {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #ff9a9e, #fad0c4);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      animation: float 5s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .planet h1 {
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 20px;
+    }
+    .portal {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      width: 300px;
+      z-index: 3;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .portal input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      border: none;
+      border-radius: 5px;
+    }
+    .portal button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .portal button:hover {
+      background: #ff3b2f;
+    }
+    .stars, .meteors {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .star, .meteor {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .star {
+      width: 2px; height: 2px;
+      background: white;
+      animation: twinkle 2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .sun {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #ff9a00, #ff4500);
+      border-radius: 50%;
+      position: absolute;
+      top: -150px; left: -150px;
+      box-shadow: 0 0 100px rgba(255, 69, 0, 0.8);
+      animation: glow 3s infinite alternate;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 50px rgba(255, 69, 0, 0.8); }
+      100% { box-shadow: 0 0 150px rgba(255, 69, 0, 1); }
+    }
+    .moon {
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, #f0f0f0, #c0c0c0);
+      border-radius: 50%;
+      position: absolute;
+      top: 20%; left: 10%;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+      animation: glow 3s infinite alternate;
+    }
+    .meteor {
+      width: 2px; height: 2px;
+      background: white;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      animation: meteor-fall linear infinite;
+    }
+    @keyframes meteor-fall {
+      0% { transform: translateY(-100vh) translateX(-100vw); }
+      100% { transform: translateY(100vh) translateX(100vw); }
+    }
+    .section {
+      display: none;
+      margin-top: 20px;
+    }
+    .section.active {
+      display: block;
+    }
+    .section .image-wrapper {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .section img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="sun"></div>
+  <div class="moon"></div>
+  <div class="meteors"></div>
+
+  <div class="container">
+    <div class="planet" onclick="openPortal()">
+      <h1>Hey Twins, Welcome!<br>Thank you for blessing this universe with your presence.</h1>
+    </div>
+
+    <div id="portal" class="portal">
+      <h2>Welcome Twins</h2>
+      <p>Please enter your name and passcode to dive into what's waiting for you.</p>
+      <input type="text" id="username" placeholder="Enter your name">
+      <input type="password" id="password" placeholder="Enter your passcode">
+      <button onclick="enterPortal()">Enter</button>
+    </div>
+
+    <!-- Nandita Portal -->
+    <div id="nandita-portal" class="portal" style="display: none;">
+      <h2>Happy Birthday Nandita! 🎉</h2>
+      <div id="nandita-sections">
+        <div id="section1" class="section active">
+          <p>Bro, as promised, here is your birthday card. Consider it also as the farewell note that was due since May 2024. 🎂✨(scroll downwards)</p>
+          <div class="image-wrapper"><img src="nandita_image1.jpg" alt="Nandita Image 1"></div>
+          <button onclick="showSection('section2')">Next</button>
+        </div>
+        <div id="section2" class="section">
+          <p>Janmdin Ki bahut bahut shubhkamnaye sabse pahle to. 🎂✨ Dhunde gaye kuchh shabd- जब तक सूरज चांद रहेगा, भाई की बेइज्जती करना, मेरा काम रहेगा !जन्मदिन की हार्दिक बधाई आपको !</p>
+          <div class="image-wrapper"><img src="nandita_image2.jpg" alt="Nandita Image 2"></div>
+          <button onclick="showSection('section3')">Next</button>
+        </div>
+        <div id="section3" class="section">
+          <p>You are an amazingly selfish woman who says, "I'll share the answers," and seldomly shares (obviously majak hai, but thoda sa sach bhi hai). It's okay, not everyone is comfortable sharing answers—even Anmol isn't.😏</p>
+          <div class="image-wrapper"><img src="nandita_image3.jpg" alt="Nandita Image 3"></div>
+          <button onclick="showSection('section4')">Next</button>
+        </div>
+        <div id="section4" class="section">
+          <p>Also, thank you kai baar meri rants sunne ke liye. Pesh hai ant me aapke janmdin hetu mere dwara likha gaya evam AI dwara gaaya gaya ek gaana. Earphones mat lagana kaan se khoon aa jayega.</p>
+          <div class="image-wrapper"><img src="nandita_image4.jpg" alt="Nandita Image 4"></div>
+          <button onclick="showSection('section5')">Next</button>
+        </div>
+        <div id="section5" class="section">
+          <p>Baki, Bhardwaj Gotra se ho, Haryana ki dharti se, and cherry on the top—Brahmin ho! You could do literally anything you desire.🚀Just remember: Harpic and phenyl mat peena, Yadav Brand se door rahna, Praachi DIDI ki har salah manana.😂Take care, and wish you a very cheerful birthday, Nandita aka Bhandita aka Nano, etc.🎉- Abhishek Singh</p>
+          <div class="image-wrapper"><img src="nandita_image5.jpg" alt="Nandita Image 5"></div>
+          <div class="audio-controls">
+            <button onclick="playBirthdaySong('nandita')">Play Song</button>
+            <button onclick="stopBirthdaySong('nandita')">Stop Song</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rishabh Portal -->
+    <div id="rishabh-portal" class="portal" style="display: none;">
+      <h2>Happy Birthday, Rishabh! 🎉</h2>
+      <div id="rishabh-sections">
+        <div id="section1-rishabh" class="section active">
+          <p>Happy Birthday, Rishabh Bhrata Shree! aapke liye ek dhunda gaya sher- ना तो तुम आसमान से टपकाए गए हो,ना तो तुम ऊपर से गिराए गए हो,कहां मिलते हैं तुम जैसे एंटीक पीस, लगता है स्पेशल ऑर्डर देकर बनवाए गए हो ! (scroll downwards) 🎂✨</p>
+          <div class="image-wrapper"><img src="rishabh_image1.jpg" alt="Rishabh Image 1"></div>
+          <button onclick="showSection('section2-rishabh')">Next</button>
+        </div>
+        <div id="section2-rishabh" class="section">
+          <p>Wishing you a fantastic year ahead!, with lots of fun, wealth and success 🚀</p>
+          <div class="image-wrapper"><img src="rishabh_image2.jpg" alt="Rishabh Image 2"></div>
+          <button onclick="showSection('section3-rishabh')">Next</button>
+        </div>
+        <div id="section3-rishabh" class="section">
+          <p>May all your dreams come true! (aise wishes ki mkc!!! aadmi har saal ek hi cheej kitni baar bole) Jo man me aaye wo karo khush raho bas illegal kaamo se door rahna🌟. Photo out of context</p>
+          <div class="image-wrapper"><img src="rishabh_image3.jpg" alt="Rishabh Image 3"></div>
+          <button onclick="showSection('section4-rishabh')">Next</button>
+        </div>
+        <div id="section4-rishabh" class="section">
+          <p>Ab to mere shabd hi khatm ho gaye, chaliye samapan ki taraf badhte hain, janmdin ki ek bar punah bahut bahut badhai. 🌟</p>
+          <div class="image-wrapper"><img src="rishabh_image4.jpg" alt="Rishabh Image 4"></div>
+          <button onclick="showSection('section5-rishabh')">Next</button>
+        </div>
+        <div id="section5-rishabh" class="section">
+          <p>Pesh hai aapke janmdin hetu mere dwara likha gaya evam AI dwara gaaya gaya ek gaana. Earphones mat lagana kaan se khoon aa jayega. - Abhishek Singh 🌟</p>
+          <div class="image-wrapper"><img src="rishabh_image5.jpg" alt="Rishabh Image 5"></div>
+            <div class="audio-controls">
+            <button onclick="playBirthdaySong('rishabh')">Play Song</button>
+            <button onclick="stopBirthdaySong('rishabh')">Stop Song</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-nandita" src="birthday_songn.mp3"></audio>
+  <audio id="audio-rishabh" src="birthday_songr.mp3"></audio>
+
+  <script>
+    const starsContainer = document.querySelector('.stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      starsContainer.appendChild(star);
+    }
+
+    const meteorsContainer = document.querySelector('.meteors');
+    for (let i = 0; i < 10; i++) {
+      const meteor = document.createElement('div');
+      meteor.classList.add('meteor');
+      meteor.style.top = `${Math.random() * 100}%`;
+      meteor.style.left = `${Math.random() * 100}%`;
+      meteor.style.animationDuration = `${Math.random() * 5 + 2}s`;
+      meteorsContainer.appendChild(meteor);
+    }
+
+    function openPortal() {
+      document.querySelector('.planet').style.display = 'none';
+      document.getElementById('portal').style.display = 'block';
+    }
+
+    function enterPortal() {
+      const username = document.getElementById('username').value.toLowerCase();
+      const password = document.getElementById('password').value;
+      if (username === 'nandita' && password === '1503') {
+        document.getElementById('portal').style.display = 'none';
+        document.getElementById('nandita-portal').style.display = 'block';
+        showSection('section1');
+      } else if (username === 'rishabh' && password === 'caesar') {
+        document.getElementById('portal').style.display = 'none';
+        document.getElementById('rishabh-portal').style.display = 'block';
+        showSection('section1-rishabh');
+      } else {
+        alert("Incorrect name or password. Try again.");
+      }
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const section = document.getElementById(id);
+      if (section) section.classList.add('active');
+    }
+
+    function playBirthdaySong(name) {
+      const audio = document.getElementById('audio-' + name);
+      audio.play();
+    }
+
+    function stopBirthdaySong(name) {
+      const audio = document.getElementById('audio-' + name);
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  </script>
+</body>
+</html>
